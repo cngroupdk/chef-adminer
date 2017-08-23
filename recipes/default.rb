@@ -7,10 +7,14 @@
 # All rights reserved - Do Not Redistribute
 #
 
+install_dir = node['adminer']['dir_to_install']
+user        = node['adminer']['user']
+group       = node['adminer']['group']
+
 # create the directories
-directory "#{node['adminer']['dir_to_install']}/plugins" do
-  owner 'root'
-  group 'root'
+directory "#{install_dir}/plugins" do
+  owner user
+  group group
   mode '0755'
   recursive true
   action :create
@@ -20,38 +24,39 @@ versions = node['adminer']['versions_available']
 file_to_download = versions[node['adminer']['version_to_install']]
 
 # download adminer (should allow selection here)
-remote_file "#{node['adminer']['dir_to_install']}/adminer.php" do
+remote_file "#{install_dir}/adminer.php" do
   source file_to_download
-  owner 'root'
-  group 'root'
+  owner user
+  group group
   mode '0644'
   action :create
 end
 
 # download plugin for plugins
-remote_file "#{node['adminer']['dir_to_install']}/plugin.php" do
+remote_file "#{install_dir}/plugins/plugin.php" do
   source 'https://raw.github.com/vrana/adminer/master/plugins/plugin.php'
-  owner 'root'
-  group 'root'
+  owner user
+  group group
   mode '0644'
   action :create
 end
 
 # download plugin
-remote_file "#{node['adminer']['dir_to_install']}/plugins/tables-filter.php" do
+remote_file "#{install_dir}/plugins/tables-filter.php" do
   source 'https://raw.github.com/vrana/adminer/master/plugins/tables-filter.php'
-  owner 'root'
-  group 'root'
+  owner user
+  group group
   mode '0644'
   action :create
 end
 
 # prepare index with plugins
-template "#{node['adminer']['dir_to_install']}/index.php" do
+template "#{install_dir}/index.php" do
   source 'index.php.erb'
-  owner 'root'
-  group 'root'
+  owner user
+  group group
   mode '0644'
+  #variables({})
 end
 
 
