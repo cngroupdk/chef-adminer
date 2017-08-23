@@ -27,6 +27,18 @@ Should work everywhere, tested on ubuntu
     <td>Which version / flavor to install</td>
     <td><tt>mysql_english</tt></td>
   </tr>
+  <tr>
+    <td><tt>['adminer']['user']</tt></td>
+    <td>String</td>
+    <td>Owner of the files installed</td>
+    <td><tt>root</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['adminer']['group']</tt></td>
+    <td>String</td>
+    <td>Group for the files installed</td>
+    <td><tt>root</tt></td>
+  </tr>
 
 </table>
 
